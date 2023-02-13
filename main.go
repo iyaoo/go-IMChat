@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
-
-	"github.com/gin-gonic/gin"
+	"github.com/iyaoo/go-IMChat/admin/service"
 )
 
 func main() {
-	fmt.Println("hello world")
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.String(200, "dangdangdangdang~")
-	})
-	r.Run()
+	service.CreateUser()
+	//config.InitConfig()
+
+	//str := config.App.Config.Settings.Database.Source
+	//r := gin.Default()
+	//r.GET("/ping", func(c *gin.Context) {
+	//	c.String(200, str)
+	//})
+	//r.Run()
 }

@@ -1,0 +1,11 @@
+settings:
+  application: 
+    env: local
+    host: 8011
+    name: go_IMChat
+    url: 127.0.0.1
+  database:
+    driver: mysql
+    source: root:Kk123@tcp(127.0.0.1:3306)/IMChat?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
+    
+
