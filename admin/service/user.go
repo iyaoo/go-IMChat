@@ -1,7 +1,7 @@
 package service
 
 import (
-	"fmt"
+	"time"
 
 	"github.com/gookit/slog"
 	"github.com/iyaoo/go-IMChat/admin/models"
@@ -13,6 +13,23 @@ func CreateUser() {
 	if err != nil {
 		slog.Errorf("gorm connect mysql failed:%s", err)
 	}
-	e := db.AutoMigrate(&models.User{}).Error()
-	fmt.Println(e)
+	user := models.User{}
+	users := []models.User{}
+	//e := db.AutoMigrate(&user).Error()
+	//fmt.Println(e)
+
+	user.Name = "Siri"
+	//user.PassWord = "123456"
+	user.Gender = "0"
+	user.LoginTime = time.Now()
+	user.LogoutTime = time.Now()
+	err = db.Create(&user).Error
+	if err != nil {
+		slog.Errorf("create field err:%s", err)
+	}
+	err = db.Find(&users).Error
+	if err != nil {
+		slog.Errorf("select user err:%s", err)
+	}
+	slog.Info(users)
 }
