@@ -6,7 +6,8 @@ import (
 )
 
 func UserRouter() *gin.Engine {
+	api := &apis.User{}
 	r := gin.Default()
-	r.GET("/getUser", apis.User)
+	r.GET("/getUser", api.GetUserList)
 	return r
 }
