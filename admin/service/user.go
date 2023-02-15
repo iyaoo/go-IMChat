@@ -72,8 +72,8 @@ func DeleteUser() {
 	db.Find(&users).Count(&count)
 	slog.Info(count)
 }
-func SelectUser() []models.User {
-	data := []models.User{}
+func SelectUser() ([]*models.User, error) {
+	data := make([]*models.User, 0)
 	var count int64
 	db, err := gorm.InitGorm()
 	if err != nil {
@@ -83,5 +83,5 @@ func SelectUser() []models.User {
 	if err != nil {
 		slog.Errorf("select user failed:%s", err)
 	}
-	return data
+	return data, nil
 }

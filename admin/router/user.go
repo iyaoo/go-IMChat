@@ -1,8 +1,12 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/iyaoo/go-IMChat/admin/apis"
+)
 
-func User() {
+func UserRouter() *gin.Engine {
 	r := gin.Default()
-	r.GET("/getUser")
+	r.GET("/getUser", apis.User)
+	return r
 }
