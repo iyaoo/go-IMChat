@@ -1,10 +1,7 @@
 package main
 
-import (
-	"github.com/iyaoo/go-IMChat/admin/router"
-)
+import "github.com/iyaoo/go-IMChat/cmd"
 
 func main() {
-	r := router.UserRouter()
-	r.Run()
+	cmd.Execute()
 }

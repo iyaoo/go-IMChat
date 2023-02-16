@@ -5,9 +5,13 @@ import (
 	"github.com/iyaoo/go-IMChat/admin/apis"
 )
 
-func UserRouter() *gin.Engine {
+func init() {
+	routerCheckRole = append(routerCheckRole, registerUserRouter)
+}
+
+func registerUserRouter(v1 *gin.RouterGroup) {
 	api := &apis.User{}
-	r := gin.Default()
-	r.GET("/getUser", api.GetUserList)
-	return r
+	{
+		v1.GET("/getuser", api.GetUserList)
+	}
 }

@@ -7,8 +7,13 @@ import (
 	"github.com/iyaoo/go-IMChat/admin/models"
 	"github.com/iyaoo/go-IMChat/admin/service/dto"
 	"github.com/iyaoo/go-IMChat/common/gorm"
+	"github.com/iyaoo/go-IMChat/common/service"
 	"github.com/iyaoo/reusable-lib/tools"
 )
+
+type User struct {
+	service.Service
+}
 
 // CreateUser
 func CreateUser() {
@@ -72,6 +77,7 @@ func DeleteUser() {
 	db.Find(&users).Count(&count)
 	slog.Info(count)
 }
+
 func SelectUser() ([]*models.User, error) {
 	data := make([]*models.User, 0)
 	var count int64
