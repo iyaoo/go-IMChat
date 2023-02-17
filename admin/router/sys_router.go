@@ -11,5 +11,4 @@ func InitSysRouter(r *gin.Engine) {
 			"msg":  "system router initialization",
 		})
 	})
-	//r.Run(":8080")
 }

@@ -8,6 +8,7 @@ import (
 	"github.com/go-admin-team/go-admin-core/sdk"
 )
 
+// InitRouter 路由初始化，不要怀疑，这里用到了
 func InitRouter() {
 	var r *gin.Engine
 	h := sdk.Runtime.GetEngine()
@@ -22,8 +23,8 @@ func InitRouter() {
 		log.Fatal("not support other engine")
 		os.Exit(-1)
 	}
-	//系统路由
+	// 系统路由
 	InitSysRouter(r)
-
-	InitExamplesRouter(r)
+	// 业务路由
+	InitProjectsRouter(r)
 }
