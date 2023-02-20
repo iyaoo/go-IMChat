@@ -91,3 +91,17 @@ func SelectUser() ([]*models.User, error) {
 	}
 	return data, nil
 }
+func (e *User) Getuser(list *[]models.User) error {
+	var count int64
+	db, err := gorm.InitGorm()
+	if err != nil {
+		slog.Errorf("gorm connect mysql failed:%s", err)
+		return err
+	}
+	err = db.Find(list).Count(&count).Error
+	if err != nil {
+		e.Log.Errorf("get user failed:%s", err)
+		return err
+	}
+	return nil
+}

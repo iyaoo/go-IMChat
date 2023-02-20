@@ -23,6 +23,7 @@ func InitRouter() {
 		log.Fatal("not support other engine")
 		os.Exit(-1)
 	}
+	//middleware.InitMiddleware(r)
 	// 系统路由
 	InitSysRouter(r)
 	// 业务路由

@@ -7,7 +7,6 @@ import (
 )
 
 func InitGorm() (*gorm.DB, error) {
-	config.InitConfig()
 	db, err := gorm.Open(mysql.Open(config.App.Config.Settings.Database.Source))
 	if err != nil {
 		return db, err

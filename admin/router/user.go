@@ -6,6 +6,7 @@ import (
 )
 
 func init() {
+	routerNoCheckRole = append(routerNoCheckRole, registerUserNoRouter)
 	routerCheckRole = append(routerCheckRole, registerUserRouter)
 }
 
@@ -13,5 +14,11 @@ func registerUserRouter(v1 *gin.RouterGroup) {
 	api := &apis.User{}
 	{
 		v1.GET("/getuser", api.GetUserList)
+	}
+}
+func registerUserNoRouter(v1 *gin.RouterGroup) {
+	api := &apis.User{}
+	{
+		v1.GET("/user", api.GetUser)
 	}
 }

@@ -11,18 +11,26 @@ type Config struct {
 	Settings Settings `yaml:"settings"`
 }
 type Settings struct {
-	Database Database `yaml:"database"`
+	Database    Database    `yaml:"database"`
+	Application Application `yaml:"application"`
 }
 type Database struct {
 	Driver string `yaml:"driver"`
 	Source string `yaml:"source"`
 }
 type Application struct {
+	Env  string `yaml:"env"`
+	Host string `yaml:"host"`
+	Name string `yaml:"name"`
+	Url  string `yaml:"url"`
+}
+
+type ConfigViper struct {
 	ConfigViper *viper.Viper
 	Config      Config
 }
 
-var App = new(Application)
+var App = new(ConfigViper)
 
 func InitConfig() *viper.Viper {
 	configFile := "config/config.yml"
