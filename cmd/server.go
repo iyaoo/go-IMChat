@@ -15,6 +15,7 @@ import (
 	"github.com/iyaoo/go-IMChat/admin/router"
 	"github.com/iyaoo/go-IMChat/common/config"
 	"github.com/iyaoo/go-IMChat/common/middleware"
+	"github.com/iyaoo/reusable-lib/tools/logger"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +25,6 @@ var startCmd = &cobra.Command{
 	Example: "go-IMChat server",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		GetConfigInfos()
-		//gorm.InitGorm()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return run()
@@ -39,6 +39,10 @@ func init() {
 
 // run 启动服务以及路由
 func run() error {
+	err := logger.InitLogger("", "", 0, nil)
+	if err != nil {
+		logger.Fatalf("init logger err:%v", err)
+	}
 	switch config.App.Config.Settings.Application.Env {
 	case "prod":
 		gin.SetMode(gin.ReleaseMode)
@@ -72,7 +76,7 @@ func initRouter() {
 	case *gin.Engine:
 		r = h.(*gin.Engine)
 	default:
-		slog.Fatal("not support other engine")
+		logger.Fatal("not support other engine")
 		os.Exit(-1)
 	}
 
@@ -83,7 +87,7 @@ func initRouter() {
 func StartAndCloseServer(r *gin.Engine) {
 	//启动服务器
 	srv := &http.Server{
-		Addr:    ":" + "8000",
+		Addr:    config.App.Config.Settings.Application.Url + ":" + config.App.Config.Settings.Application.Host,
 		Handler: sdk.Runtime.GetEngine(),
 	}
 	go func() {
@@ -96,12 +100,12 @@ func StartAndCloseServer(r *gin.Engine) {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	slog.Println("Shutdown Server ...")
+	log.Println("Shutdown Server ...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		slog.Fatal("Server Shutdown:", err)
+		logger.Fatal("Server Shutdown:", err)
 	}
 
 	log.Println("Server exiting")

@@ -23,18 +23,13 @@ func CreateUser() {
 	}
 	user := models.User{}
 	users := []models.User{}
-	//e := db.AutoMigrate(&user).Error()
-	//fmt.Println(e)
 
 	user.Name = "James"
 	user.PassWord = "123456"
 	user.Gender = "1"
 	user.LoginTime = time.Now()
 	user.LogoutTime = time.Now()
-	//err = db.Create(&user).Error
-	//if err != nil {
-	//	slog.Errorf("create field err:%s", err)
-	//}
+
 	err = db.Find(&users).Error
 	if err != nil {
 		slog.Errorf("select user err:%s", err)
@@ -100,7 +95,7 @@ func (e *User) Getuser(list *[]models.User) error {
 	}
 	err = db.Find(list).Count(&count).Error
 	if err != nil {
-		e.Log.Errorf("get user failed:%s", err)
+		slog.Errorf("get user failed:%s", err)
 		return err
 	}
 	return nil

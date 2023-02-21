@@ -208,6 +208,8 @@ github.com/inconshreveable/mousetrap v1.0.1 h1:U3uMjPSQEBMNp1lFxmllqCPM6P5u/Xq7P
 github.com/inconshreveable/mousetrap v1.0.1/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/iyaoo/reusable-lib v1.0.1 h1:Gv3od1yEgO6Q7dn6VGSNTfPwdpryZVw3QxUXXhQQ+6w=
 github.com/iyaoo/reusable-lib v1.0.1/go.mod h1:PSMDGvhUql5HAbgIwIPpkKb0zdA4pphXVnmrZHOED/0=
+github.com/iyaoo/reusable-lib v1.0.2 h1:u89jwTXkkkGnFRGfbUdXDZGLo6YR9UMTRNdrKCfPVXg=
+github.com/iyaoo/reusable-lib v1.0.2/go.mod h1:m9lG8wJjM0CNUrIfaXhu2iJMLAGEf9BriFlT9c0+6Zs=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.4/go.mod h1:d3SSVoowX0Lcu0IBviAWJpolVfI5UJVZZ7cO71lE/z8=

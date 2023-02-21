@@ -32,6 +32,7 @@ type ConfigViper struct {
 
 var App = new(ConfigViper)
 
+// 配置文件初始化
 func InitConfig() *viper.Viper {
 	configFile := "config/config.yml"
 

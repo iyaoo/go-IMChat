@@ -2,7 +2,7 @@ settings:
   application: 
   # dev开发环境 test测试环境 prod线上环境
     env: dev
-    host: 8011
+    host: 8000
     name: go_IMChat
     url: 127.0.0.1
   database:
