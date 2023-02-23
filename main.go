@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	cmd.Execute()
 	logger.Info("init logger success")
+	cmd.Execute()
 }
