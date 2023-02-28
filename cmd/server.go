@@ -44,6 +44,7 @@ func run() error {
 	if err != nil {
 		logger.Fatalf("init logger err:%v", err)
 	}
+
 	switch config.App.Config.Settings.Application.Env {
 	case "prod":
 		gin.SetMode(gin.ReleaseMode)

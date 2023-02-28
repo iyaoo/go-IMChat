@@ -41,7 +41,7 @@ require (
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gookit/color v1.5.2 // indirect
-	github.com/gookit/goutil v0.6.5 // indirect
+	github.com/gookit/goutil v0.6.6 // indirect
 	github.com/gookit/gsr v0.0.8 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
@@ -99,7 +99,7 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-admin-team/go-admin-core/sdk v1.5.1
 	github.com/gookit/slog v0.4.0
-	github.com/iyaoo/reusable-lib v1.0.5
+	github.com/iyaoo/reusable-lib v1.0.8
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/spf13/viper v1.15.0
 	golang.org/x/sys v0.5.0 // indirect
