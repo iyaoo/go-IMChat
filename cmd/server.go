@@ -39,7 +39,8 @@ func init() {
 
 // run 启动服务以及路由
 func run() error {
-	err := logger.InitLogger("", "", 0, nil)
+	formatter := slog.NewJSONFormatter()
+	err := logger.InitLogger(config.App.Config.Settings.Logger.Path, config.App.Config.Settings.Logger.Level, formatter)
 	if err != nil {
 		logger.Fatalf("init logger err:%v", err)
 	}

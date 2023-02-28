@@ -5,8 +5,14 @@ settings:
     host: 8000
     name: go_IMChat
     url: 127.0.0.1
+  logger:
+    # 日志等级, trace, debug, info, warn, error, fatal
+    level: info
+    # 日志存放路径
+    path: ./log/
   database:
     driver: mysql
-    source: root:Kk123@tcp(127.0.0.1:3306)/IMChat?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
+    # source: root:12345678@tcp(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
+    source: root:12345678@tcp(127.0.0.1:3306)/dbname?charset=utf8&parseTime=True&loc=Local&timeout=1000ms
     
 

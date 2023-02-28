@@ -13,10 +13,15 @@ type Config struct {
 type Settings struct {
 	Database    Database    `yaml:"database"`
 	Application Application `yaml:"application"`
+	Logger      Logger      `yaml:"logger"`
 }
 type Database struct {
 	Driver string `yaml:"driver"`
 	Source string `yaml:"source"`
+}
+type Logger struct {
+	Level string `yaml:"level"`
+	Path  string `yaml:"path"`
 }
 type Application struct {
 	Env  string `yaml:"env"`
