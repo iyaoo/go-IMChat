@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -11,6 +12,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk"
+	"github.com/go-admin-team/go-admin-core/sdk/pkg"
 	"github.com/gookit/slog"
 	"github.com/iyaoo/go-IMChat/admin/router"
 	"github.com/iyaoo/go-IMChat/common/config"
@@ -24,7 +26,7 @@ var startCmd = &cobra.Command{
 	Short:   "Start API server",
 	Example: "go-IMChat server",
 	PreRun: func(cmd *cobra.Command, args []string) {
-		GetConfigInfos()
+		InitConfigAndLogger()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return run()
@@ -39,12 +41,6 @@ func init() {
 
 // run 启动服务以及路由
 func run() error {
-	formatter := slog.NewJSONFormatter()
-	err := logger.InitLogger(config.App.Config.Settings.Logger.Path, config.App.Config.Settings.Logger.Level, formatter)
-	if err != nil {
-		logger.Fatalf("init logger err:%v", err)
-	}
-
 	switch config.App.Config.Settings.Application.Env {
 	case "prod":
 		gin.SetMode(gin.ReleaseMode)
@@ -82,6 +78,7 @@ func initRouter() {
 		os.Exit(-1)
 	}
 
+	r.Use(middleware.RequestId(pkg.TrafficKey))
 	middleware.InitMiddleware(r)
 }
 
@@ -89,7 +86,7 @@ func initRouter() {
 func StartAndCloseServer(r *gin.Engine) {
 	//启动服务器
 	srv := &http.Server{
-		Addr:    config.App.Config.Settings.Application.Url + ":" + config.App.Config.Settings.Application.Host,
+		Addr:    config.App.Config.Settings.Application.Url + ":" + config.App.Config.Settings.Application.Port,
 		Handler: sdk.Runtime.GetEngine(),
 	}
 	go func() {
@@ -97,17 +94,20 @@ func StartAndCloseServer(r *gin.Engine) {
 			slog.Fatalf("listen: %s\n", err)
 		}
 	}()
-
+	logger.Info("Service started successfully!")
+	fmt.Println(pkg.Green("Server run at:"))
+	fmt.Printf("-  Local:   http://localhost:%s/ \r\n", config.App.Config.Settings.Application.Port)
+	fmt.Printf("-  Network: http://%s:%s/ \r\n", pkg.GetLocaHonst(), config.App.Config.Settings.Application.Port)
 	// 等待中断信号以优雅地关闭服务器（设置 5 秒的超时时间）
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Println("Shutdown Server ...")
+	log.Printf("%s Shutdown Server ... \r\n", time.Now().Format("2006-01-02 15:04:05"))
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
-		logger.Fatal("Server Shutdown:", err)
+		log.Fatal("Server Shutdown:", err)
 	}
 
 	log.Println("Server exiting")

@@ -25,7 +25,7 @@ type Logger struct {
 }
 type Application struct {
 	Env  string `yaml:"env"`
-	Host string `yaml:"host"`
+	Port string `yaml:"port"`
 	Name string `yaml:"name"`
 	Url  string `yaml:"url"`
 }

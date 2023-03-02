@@ -37,8 +37,5 @@ func (e *User) GetUser(c *gin.Context) {
 	if err != nil {
 		slog.Info(err)
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"code": "200",
-		"msg":  list,
-	})
+	e.OK(c, list, "查询成功")
 }

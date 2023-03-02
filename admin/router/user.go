@@ -13,7 +13,7 @@ func init() {
 func registerUserRouter(v1 *gin.RouterGroup) {
 	api := &apis.User{}
 	{
-		v1.GET("/getuser", api.GetUserList)
+		v1.GET("/getuser", api.GetUser)
 	}
 }
 func registerUserNoRouter(v1 *gin.RouterGroup) {
