@@ -15,6 +15,20 @@ type User struct {
 	service.Service
 }
 
+func (e *User) Getuser(list *[]models.User) error {
+	db, err := gorm.InitGorm()
+	if err != nil {
+		slog.Errorf("gorm connect mysql failed:%s", err)
+		return err
+	}
+	err = db.Find(list).Error
+	if err != nil {
+		slog.Errorf("get user failed:%s", err)
+		return err
+	}
+	return nil
+}
+
 // CreateUser
 func CreateUser() {
 	db, err := gorm.InitGorm()
@@ -85,18 +99,4 @@ func SelectUser() ([]*models.User, error) {
 		slog.Errorf("select user failed:%s", err)
 	}
 	return data, nil
-}
-func (e *User) Getuser(list *[]models.User) error {
-	var count int64
-	db, err := gorm.InitGorm()
-	if err != nil {
-		slog.Errorf("gorm connect mysql failed:%s", err)
-		return err
-	}
-	err = db.Find(list).Count(&count).Error
-	if err != nil {
-		slog.Errorf("get user failed:%s", err)
-		return err
-	}
-	return nil
 }

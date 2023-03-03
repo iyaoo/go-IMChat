@@ -14,6 +14,17 @@ type User struct {
 	apis.Api
 }
 
+// GetUser
+func (e *User) GetUser(c *gin.Context) {
+	list := make([]models.User, 0)
+	serviceUser := service.User{}
+	err := serviceUser.Getuser(&list)
+	if err != nil {
+		slog.Info(err)
+	}
+	e.OK(c, list, "查询成功")
+}
+
 // GetUserList 查询所有User
 func (e *User) GetUserList(c *gin.Context) {
 	data, err := service.SelectUser()
@@ -27,15 +38,4 @@ func (e *User) GetUserList(c *gin.Context) {
 		"code": "200",
 		"msg":  data,
 	})
-}
-
-// GetUser
-func (e *User) GetUser(c *gin.Context) {
-	list := make([]models.User, 0)
-	serviceUser := service.User{}
-	err := serviceUser.Getuser(&list)
-	if err != nil {
-		slog.Info(err)
-	}
-	e.OK(c, list, "查询成功")
 }

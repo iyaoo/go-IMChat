@@ -10,15 +10,20 @@ func init() {
 	routerCheckRole = append(routerCheckRole, registerUserRouter)
 }
 
+// /api/v1
 func registerUserRouter(v1 *gin.RouterGroup) {
 	api := &apis.User{}
+	r := v1.Group("/app")
 	{
-		v1.GET("/getuser", api.GetUser)
+		r.GET("user", api.GetUser)
 	}
 }
+
+// /v1
 func registerUserNoRouter(v1 *gin.RouterGroup) {
 	api := &apis.User{}
+	r := v1.Group("/app").Use()
 	{
-		v1.GET("/user", api.GetUser)
+		r.GET("/user", api.GetUser)
 	}
 }

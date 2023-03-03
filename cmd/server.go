@@ -16,7 +16,6 @@ import (
 	"github.com/gookit/slog"
 	"github.com/iyaoo/go-IMChat/admin/router"
 	"github.com/iyaoo/go-IMChat/common/config"
-	"github.com/iyaoo/go-IMChat/common/middleware"
 	"github.com/iyaoo/reusable-lib/tools/logger"
 	"github.com/spf13/cobra"
 )
@@ -41,6 +40,11 @@ func init() {
 
 // run 启动服务以及路由
 func run() error {
+	engine := sdk.Runtime.GetEngine()
+	if engine == nil {
+		engine = gin.New()
+	}
+
 	switch config.App.Config.Settings.Application.Env {
 	case "prod":
 		gin.SetMode(gin.ReleaseMode)
@@ -49,41 +53,26 @@ func run() error {
 	default:
 		gin.SetMode(gin.TestMode)
 	}
-	//创建*gin.Engine变量
-	r := gin.Default()
-	sdk.Runtime.SetEngine(r)
+
+	err := logger.InitLogger(config.App.Config.Settings.Logger.Path, config.App.Config.Settings.Logger.Level, map[string]interface{}{
+		"appname":  config.App.Config.Settings.Application.Name,
+		"hostname": pkg.GetLocaHonst(),
+	}, slog.NewJSONFormatter())
+	if err != nil {
+		logger.Fatalf("init logger err %v", err)
+	}
 
 	for _, f := range AppRouters {
 		f()
 	}
-	initRouter()
 
-	StartAndCloseServer(r)
+	StartAndCloseServer()
+
 	return nil
 }
 
-// initRouter 注册中间件
-func initRouter() {
-	var r *gin.Engine
-	h := sdk.Runtime.GetEngine()
-	if h == nil {
-		h = gin.New()
-		sdk.Runtime.SetEngine(h)
-	}
-	switch h.(type) {
-	case *gin.Engine:
-		r = h.(*gin.Engine)
-	default:
-		logger.Fatal("not support other engine")
-		os.Exit(-1)
-	}
-
-	r.Use(middleware.RequestId(pkg.TrafficKey))
-	middleware.InitMiddleware(r)
-}
-
 // StartAndCloseServer 启、停服务
-func StartAndCloseServer(r *gin.Engine) {
+func StartAndCloseServer() {
 	//启动服务器
 	srv := &http.Server{
 		Addr:    config.App.Config.Settings.Application.Url + ":" + config.App.Config.Settings.Application.Port,
@@ -102,7 +91,7 @@ func StartAndCloseServer(r *gin.Engine) {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	log.Printf("%s Shutdown Server ... \r\n", time.Now().Format("2006-01-02 15:04:05"))
+	log.Printf("Shutdown Server ... \r\n")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
