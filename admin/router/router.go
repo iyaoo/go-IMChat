@@ -9,7 +9,7 @@ var (
 	routerCheckRole   = make([]func(v1 *gin.RouterGroup), 0)
 )
 
-// 初始化业务路由
+// InitProjectsRouter 初始化业务路由
 func InitProjectsRouter(r *gin.Engine) *gin.Engine {
 
 	// 需要认证的路由

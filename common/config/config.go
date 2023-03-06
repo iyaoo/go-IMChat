@@ -30,6 +30,7 @@ type Application struct {
 	Url  string `yaml:"url"`
 }
 
+// ConfigViper 使用Viper获取配置文件信息
 type ConfigViper struct {
 	ConfigViper *viper.Viper
 	Config      Config
@@ -37,7 +38,7 @@ type ConfigViper struct {
 
 var App = new(ConfigViper)
 
-// 配置文件初始化
+// InitConfig 配置文件初始化
 func InitConfig() *viper.Viper {
 	configFile := "config/config.yml"
 

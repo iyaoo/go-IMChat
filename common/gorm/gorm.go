@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// InitGorm 初始化gorm连接
 func InitGorm() (*gorm.DB, error) {
 	db, err := gorm.Open(mysql.Open(config.App.Config.Settings.Database.Source))
 	if err != nil {

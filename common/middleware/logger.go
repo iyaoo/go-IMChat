@@ -7,6 +7,7 @@ import (
 	"github.com/iyaoo/reusable-lib/tools/logger"
 )
 
+// LoggerToFile gin日志中间件
 func LoggerToFile() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 开始时间

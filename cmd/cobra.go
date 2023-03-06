@@ -20,7 +20,7 @@ func Execute() {
 		os.Exit(-1)
 	}
 }
-func init() {
 
+func init() {
 	rootCmd.AddCommand(startCmd)
 }
