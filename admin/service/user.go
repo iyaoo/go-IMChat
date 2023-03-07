@@ -11,7 +11,8 @@ type User struct {
 	service.Service
 }
 
-func (e *User) Getuser(list *[]models.User) error {
+// GetUser 获取User信息
+func (e *User) GetUser(list *[]models.User) error {
 	db, err := gorm.InitGorm()
 	if err != nil {
 		slog.Errorf("gorm connect mysql failed:%s", err)
@@ -22,5 +23,8 @@ func (e *User) Getuser(list *[]models.User) error {
 		slog.Errorf("get user failed:%s", err)
 		return err
 	}
+	return nil
+}
+func (e *User) DeleteUser() error {
 	return nil
 }

@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Api
 type Api struct {
 }
 

@@ -10,14 +10,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gookit/slog"
+	"github.com/spf13/cobra"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk"
 	"github.com/go-admin-team/go-admin-core/sdk/pkg"
-	"github.com/gookit/slog"
 	"github.com/iyaoo/go-IMChat/admin/router"
 	"github.com/iyaoo/go-IMChat/common/config"
 	"github.com/iyaoo/reusable-lib/tools/logger"
-	"github.com/spf13/cobra"
 )
 
 var startCmd = &cobra.Command{
@@ -54,10 +55,10 @@ func run() error {
 		gin.SetMode(gin.TestMode)
 	}
 
-	err := logger.InitLogger(config.App.Config.Settings.Logger.Path, config.App.Config.Settings.Logger.Level, map[string]interface{}{
-		"appname":  config.App.Config.Settings.Application.Name,
+	err := logger.InitLogger(config.App.Config.Settings.Logger.Path, config.App.Config.Settings.Logger.Level, slog.NewJSONFormatter(), map[string]interface{}{
+		"app_name": config.App.Config.Settings.Application.Name,
 		"hostname": pkg.GetLocaHonst(),
-	}, slog.NewJSONFormatter())
+	})
 	if err != nil {
 		logger.Fatalf("init logger err %v", err)
 	}

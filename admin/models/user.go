@@ -6,6 +6,7 @@ import (
 	"github.com/iyaoo/go-IMChat/common/models"
 )
 
+// User 用户表查询使用
 type User struct {
 	ID            int       `json:"id" gorm:"column:id;primaryKey;autoIncrement;comment:自增主键id"`
 	Name          string    `json:"name" gorm:"column:name;comment:用户姓名"`
@@ -24,6 +25,7 @@ type User struct {
 	models.GormTime
 }
 
+// TableName 获取表名
 func (table *User) TableName() string {
 	return "user"
 }

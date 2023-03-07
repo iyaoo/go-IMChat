@@ -16,7 +16,7 @@ type User struct {
 func (e *User) GetUser(c *gin.Context) {
 	list := make([]models.User, 0)
 	serviceUser := service.User{}
-	err := serviceUser.Getuser(&list)
+	err := serviceUser.GetUser(&list)
 	if err != nil {
 		slog.Info(err)
 	}
