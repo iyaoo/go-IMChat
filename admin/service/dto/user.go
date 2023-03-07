@@ -23,6 +23,16 @@ type UserControl struct {
 	models.GormTime
 }
 
+// TableName 获取表名
 func (table *UserControl) TableName() string {
 	return "user"
+}
+
+// UserById 获取单个或者删除的结构体
+type UserById struct {
+	UserID int `uri:"id"`
+}
+
+func (u *UserById) GetId() interface{} {
+	return u.UserID
 }

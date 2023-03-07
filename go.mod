@@ -6,7 +6,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/gin-gonic/gin v1.9.0
 	github.com/gookit/slog v0.4.0
-	github.com/iyaoo/reusable-lib v1.1.5
+	github.com/iyaoo/reusable-lib v1.1.6
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.15.0
 	gorm.io/driver/mysql v1.4.7

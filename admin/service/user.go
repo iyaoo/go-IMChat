@@ -25,6 +25,6 @@ func (e *User) GetUser(list *[]models.User) error {
 	}
 	return nil
 }
-func (e *User) DeleteUser() error {
+func (e *User) RemoveUser() error {
 	return nil
 }
