@@ -19,41 +19,25 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.0 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/andygrunwald/go-jira v1.16.0 // indirect
-	github.com/aws/aws-sdk-go v1.38.21 // indirect
-	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/coreos/go-semver v0.3.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-admin-team/go-admin-core v1.5.1 // indirect
 	github.com/go-admin-team/redisqueue/v2 v2.0.0 // indirect
-	github.com/go-redis/redis/v7 v7.4.0 // indirect
-	github.com/go-resty/resty/v2 v2.6.0 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/huandu/xstrings v1.4.0 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/jonboulle/clockwork v0.3.0 // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kyokomi/emoji/v2 v2.2.12 // indirect
-	github.com/lestrrat-go/file-rotatelogs v2.4.0+incompatible // indirect
-	github.com/lestrrat-go/strftime v1.0.5 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/nsqio/go-nsq v1.1.0 // indirect
 	github.com/redis/go-redis/v9 v9.0.2 // indirect
-	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5 // indirect
-	github.com/robfig/cron v1.2.0 // indirect
-	github.com/robinjoseph08/redisqueue/v2 v2.1.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/shopspring/decimal v1.3.1 // indirect
-	github.com/sirupsen/logrus v1.4.2 // indirect
 	github.com/trivago/tgo v1.0.7 // indirect
 	github.com/urfave/cli/v2 v2.24.4 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/multierr v1.8.0 // indirect
-	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/mod v0.8.0 // indirect
 	golang.org/x/term v0.6.0 // indirect
 )
