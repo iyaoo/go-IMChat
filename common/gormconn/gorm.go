@@ -1,4 +1,4 @@
-package gorm
+package gormconn
 
 import (
 	"github.com/iyaoo/go-IMChat/common/config"

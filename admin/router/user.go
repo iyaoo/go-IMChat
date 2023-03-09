@@ -16,6 +16,7 @@ func registerUserRouter(v1 *gin.RouterGroup) {
 	r := v1.Group("/app")
 	{
 		r.GET("/user", api.GetUser)
+		r.GET("/user/:id", api.GetUserByID)
 	}
 }
 
@@ -25,5 +26,7 @@ func registerUserNoRouter(v1 *gin.RouterGroup) {
 	r := v1.Group("/app").Use()
 	{
 		r.GET("/user", api.GetUser)
+		r.GET("/user/:id", api.GetUserByID)
+		r.POST("/user")
 	}
 }
