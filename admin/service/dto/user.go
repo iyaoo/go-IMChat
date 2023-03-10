@@ -1,33 +1,60 @@
 package dto
 
 import (
+	"encoding/json"
+	"time"
+
 	"github.com/CoolBank/coinhub-base/logger"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/iyaoo/go-IMChat/admin/models"
 )
 
-// UserControl 用户增、改使用结构体
 type UserControl struct {
-	Name     string `json:"name" gorm:"column:name;not null;comment:用户姓名"`
-	PassWord string `json:"password" gorm:"column:password;not null;comment:用户密码"`
-	Gender   string `json:"gender" gorm:"column:gender"`
-	Phone    string `json:"phone" gorm:"column:phone"`
-	Email    string `json:"email" gorm:"column:email"`
-	Identity string `json:"identity" gorm:"column:identity"`
+	UserID     int       `json:"id" uri:"id"`
+	Name       string    `json:"name"`
+	PassWord   string    `json:"password"`
+	Gender     string    `json:"gender"`
+	Phone      string    `json:"phone"`
+	Email      string    `json:"email"`
+	Identity   string    `json:"identity"`
+	LoginTime  time.Time `json:"login_time"`
+	LogoutTime time.Time `json:"logout_time"`
 }
 
-// TableName 获取表名
-func (table *UserControl) TableName() string {
-	return "user"
-}
-
-// Bind 映射上下文中的结构体数据
+// Bind
 func (s *UserControl) Bind(ctx *gin.Context) error {
-	err := ctx.Bind(s)
+	err := ctx.ShouldBindUri(s)
 	if err != nil {
-		logger.Debugf("Bind error: %s", err.Error())
+		logger.Debugf("ShouldBindUri error: %s", err.Error())
 		return err
 	}
+	err = ctx.ShouldBindBodyWith(s, binding.JSON)
+	if err != nil {
+		logger.Debugf("ShouldBind error: %s", err.Error())
+	}
+	var jsonStr []byte
+	jsonStr, err = json.Marshal(s)
+	if err != nil {
+		logger.Debugf("ShouldBind error: %s", err.Error())
+	}
+	ctx.Set("body", string(jsonStr))
 	return err
+}
+
+// Generate 结构体数据转化 从 UserControl 至 models.User 对应的模型
+func (s *UserControl) Generate() (*models.User, error) {
+	return &models.User{
+		ID:         s.UserID,
+		Name:       s.Name,
+		PassWord:   s.PassWord,
+		Gender:     s.Gender,
+		Phone:      s.Phone,
+		Email:      s.Email,
+		Identity:   s.Identity,
+		LoginTime:  time.Now(),
+		LogoutTime: time.Now(),
+	}, nil
 }
 
 // UserById 获取单个或者删除的结构体

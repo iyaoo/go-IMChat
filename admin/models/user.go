@@ -29,3 +29,6 @@ type User struct {
 func (table *User) TableName() string {
 	return "user"
 }
+func (e *User) GetId() interface{} {
+	return e.ID
+}

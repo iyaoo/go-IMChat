@@ -17,6 +17,9 @@ func registerUserRouter(v1 *gin.RouterGroup) {
 	{
 		r.GET("/user", api.GetUser)
 		r.GET("/user/:id", api.GetUserByID)
+		r.POST("/user", api.InsertUser)
+		r.PUT("/user/:id", api.UpdateUser)
+		r.DELETE("/user/:id", api.DeleteUser)
 	}
 }
 
@@ -27,6 +30,6 @@ func registerUserNoRouter(v1 *gin.RouterGroup) {
 	{
 		r.GET("/user", api.GetUser)
 		r.GET("/user/:id", api.GetUserByID)
-		r.POST("/user")
+		r.POST("/user", api.InsertUser)
 	}
 }
